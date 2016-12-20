@@ -14,5 +14,4 @@ git clone https://github.com/begarco/IAE.git
 # installing payara
 unzip IAE/matos/payara.zip .
 # driver jdbc
-wget http://vm.elfoa.fr/mysql-jdbc.jar
-cp mysql-jdbc.jar payara41/glasfish/lib
+cp IAE/matos/mysql-jdbc.jar payara41/glasfish/lib
