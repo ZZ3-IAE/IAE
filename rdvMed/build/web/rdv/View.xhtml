@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewRdvTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewRdvLabel_id}"/>
+                    <h:outputText value="#{rdvController.selected.id}" title="#{bundle.ViewRdvTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewRdvLabel_date}"/>
+                    <h:outputText value="#{rdvController.selected.date}" title="#{bundle.ViewRdvTitle_date}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewRdvLabel_patient}"/>
+                    <h:outputText value="#{rdvController.selected.patient}" title="#{bundle.ViewRdvTitle_patient}"/>
+                    <h:outputText value="#{bundle.ViewRdvLabel_creneau}"/>
+                    <h:outputText value="#{rdvController.selected.creneau}" title="#{bundle.ViewRdvTitle_creneau}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{rdvController.destroyAndView}" value="#{bundle.ViewRdvDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewRdvEditLink}"/>
+                <br />
+                <h:commandLink action="#{rdvController.prepareCreate}" value="#{bundle.ViewRdvCreateLink}" />
+                <br />
+                <h:commandLink action="#{rdvController.prepareList}" value="#{bundle.ViewRdvShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewRdvIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
