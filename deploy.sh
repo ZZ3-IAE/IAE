@@ -9,9 +9,17 @@ apt-get install -y oraclejdk8
 apt-get install -y mysql
 # installing git
 apt-get install -y git
+# installing firefox
+apt-get install -y firefox
 # downloading project
 git clone https://github.com/begarco/IAE.git
 # installing payara
-unzip IAE/matos/payara.zip .
+cp -r IAE/matos/payara41 .
 # driver jdbc
 cp IAE/matos/mysql-jdbc.jar payara41/glasfish/lib
+# starting payara
+payara41/bin/asadmin start-domain
+# deploying app
+payara41/bin/asadmin deploy IAE/rdvMed/dist/rdvMed.war
+# launching demo
+firefox localhost:8080/rdvMed
