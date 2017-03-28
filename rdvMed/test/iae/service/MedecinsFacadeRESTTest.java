@@ -44,7 +44,7 @@ public class MedecinsFacadeRESTTest {
 	@Test
 	public void find() {
 		String id = "0";
-		WebTarget target = client.target(URL + "/find/" + id);
+		WebTarget target = client.target(URL + "/" + id);
 		Response response = target.request().get();
 		if (response.getStatus() != 200) {
 			fail("RESPONSE STATUS" + response.getStatus());
@@ -61,10 +61,31 @@ public class MedecinsFacadeRESTTest {
 		}
 
 	}
+	
+	@Test
+	public void count() {
+		WebTarget target = client.target(URL + "/count");
+		Response response = target.request().get();
+		if (response.getStatus() != 200) {
+			fail("RESPONSE STATUS" + response.getStatus());
+		}
+
+	}
+	
+	@Test
+	public void findRange() {
+		WebTarget target = client.target(URL + "/1/3");
+		Response response = target.request().get();
+		if (response.getStatus() != 200) {
+			fail("RESPONSE STATUS" + response.getStatus());
+		}
+
+	}
 
 	@Test
 	public void update() {
-		WebTarget target = client.target(URL);
+		String id = "0";
+		WebTarget target = client.target(URL + "/" + id);
 
 		Medecins m = new Medecins((short)0);
 		Response response = target.request().put(
@@ -77,7 +98,7 @@ public class MedecinsFacadeRESTTest {
 	@Test
 	public void delete() {
 		String id = "0";
-		WebTarget target = client.target(URL+"/"+id);
+		WebTarget target = client.target(URL + "/" + id);
 		Response response = target.request().delete();
 		if (response.getStatus() != 204) {
 			fail("RESPONSE STATUS" + response.getStatus());
