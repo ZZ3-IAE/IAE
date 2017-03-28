@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(fr.isima.rdvmed.service.CreneauxFacadeREST.class);
         resources.add(fr.isima.rdvmed.service.MedecinsFacadeREST.class);
         resources.add(fr.isima.rdvmed.service.PatientsFacadeREST.class);
         resources.add(fr.isima.rdvmed.service.RdvFacadeREST.class);
