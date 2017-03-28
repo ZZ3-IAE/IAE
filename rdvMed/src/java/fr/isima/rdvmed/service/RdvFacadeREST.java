@@ -18,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -48,8 +49,16 @@ public class RdvFacadeREST {
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
     @Path("{id}")
-    public void remove(@PathParam("id") Short id) {
-        rdv.remove(rdv.find(id));
+    public Response remove(@PathParam("id") Short id) {
+        Rdv rrdv = rdv.find(id);
+        Response r;
+        if(rrdv!=null) {
+            rdv.remove(rrdv);
+            r = Response.ok().build();
+        } else {
+            r = Response.notModified().build();
+        }
+        return r;
     }
 
     @GET
