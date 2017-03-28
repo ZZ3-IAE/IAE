@@ -5,7 +5,7 @@ jdk:
 before_install:
 - chmod a+rwx deploy.sh test.sh
 install:
-- "./deploy.sh"
+- sudo "./deploy.sh"
 script:
 - "./test.sh"
 deploy:

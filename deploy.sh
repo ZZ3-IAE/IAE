@@ -25,7 +25,7 @@ payara41/bin/asadmin start-domain
 payara41/bin/asadmin create-jdbc-connection-pool --datasourceclassname com.mysql.jdbc.jdbc2.optional.MysqlDataSource --restype javax.sql.DataSource --property user=root:password=iae2016:DatabaseName=tp_iae:ServerName=localhost:port=3306 tp_iae_pool
 payara41/bin/asadmin ping-connection-pool tp_iae_pool
 # creating a data source
-payara41/bin/asadmin --passwordfile credentials.dat create-jdbc-resource --connectionpoolid tp_iae_pool tp_iae
+payara41/bin/asadmin create-jdbc-resource --connectionpoolid tp_iae_pool tp_iae
 # deploying app
 payara41/bin/asadmin deploy IAE/rdvMed/dist/rdvMed.war
 # launching demo
