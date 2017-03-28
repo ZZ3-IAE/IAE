@@ -19,31 +19,38 @@ public class MedecinsFacadeRESTTest {
 
 	private Client client;
         
-        private Date newDate;
+        private short id;
+        private String CLEF;
+
 
 	@Before
 	public void setup() {
             client = ClientBuilder.newClient();
-            newDate = new Date();
+            CLEF = "TEST";
+            id=1;
 	}
 
 	@Test
 	public void create() {
-
 		WebTarget target = client.target(URL);
 
-		Medecins m = new Medecins((short)0);
+		Medecins m = new Medecins();
+                m.setNom(CLEF);
+                
 		Response response = target.request().post(
 				Entity.entity(m, MediaType.APPLICATION_JSON));
 
 		if (response.getStatus() != 200) {
 			fail("RESPONSE STATUS" + response.getStatus());
-		}
+		}else{
+                    Medecins created = (Medecins)response.getEntity();
+                    id = created.getId();
+                }
+                
 	}
 
 	@Test
 	public void find() {
-		String id = "0";
 		WebTarget target = client.target(URL + "/" + id);
 		Response response = target.request().get();
 		if (response.getStatus() != 200) {
@@ -51,15 +58,14 @@ public class MedecinsFacadeRESTTest {
 		}
 
 	}
-
-	@Test
+        
+        @Test
 	public void list() {
 		WebTarget target = client.target(URL);
 		Response response = target.request().get();
 		if (response.getStatus() != 200) {
 			fail("RESPONSE STATUS" + response.getStatus());
 		}
-
 	}
 	
 	@Test
@@ -84,7 +90,6 @@ public class MedecinsFacadeRESTTest {
 
 	@Test
 	public void update() {
-		String id = "0";
 		WebTarget target = client.target(URL + "/" + id);
 
 		Medecins m = new Medecins((short)0);
@@ -97,7 +102,6 @@ public class MedecinsFacadeRESTTest {
 
 	@Test
 	public void delete() {
-		String id = "0";
 		WebTarget target = client.target(URL + "/" + id);
 		Response response = target.request().delete();
 		if (response.getStatus() != 204) {
