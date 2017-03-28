@@ -6,25 +6,18 @@ apt-get update -y -qq
 # installing java jdk 8
 apt-get install -y oraclejdk8 -qq
 # installing mysql
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password iae2016'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password iae2016'
-apt-get -y install mysql-server
+apt-get -y install mysql-server -qq
+mysqladmin -u root password iae2016
 # installing git
 apt-get install -y git -qq
 # installing firefox
 apt-get install -y firefox -qq
 # downloading project
 git clone https://github.com/begarco/IAE.git
-echo "après clone"
-pwd
-ls -l
 # installing payara
 cp -r IAE/matos/payara41 .
-echo "copie de payara"
-pwd
-ls -l
 # driver jdbc
-cp IAE/matos/mysql-jdbc.jar payara41/glasfish/lib
+cp IAE/matos/mysql-jdbc.jar payara41/glassfish/lib
 # creation of database
 mysql -u root --password=iae2016 < IAE/matos/script.sql
 # starting payara
