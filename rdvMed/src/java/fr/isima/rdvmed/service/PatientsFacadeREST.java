@@ -24,7 +24,6 @@ import javax.ws.rs.core.MediaType;
  *
  * @author vagrant
  */
-@Stateless
 @Path("patients")
 public class PatientsFacadeREST {
 
