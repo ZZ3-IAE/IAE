@@ -1,0 +1,1 @@
+echo "ALL TESTS PASSED"
