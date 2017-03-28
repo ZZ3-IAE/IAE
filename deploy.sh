@@ -6,9 +6,10 @@ apt-get update -y -qq
 # installing java jdk 8
 apt-get install -y oraclejdk8 -qq
 # installing mysql
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password iae2016'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password iae2016'
-apt-get -y install mysql-server
+#debconf-set-selections <<< 'mysql-server mysql-server/root_password password iae2016'
+#debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password iae2016'
+apt-get -y install mysql-server -qq
+mysqladmin -u root password iae2016
 # installing git
 apt-get install -y git -qq
 # installing firefox
