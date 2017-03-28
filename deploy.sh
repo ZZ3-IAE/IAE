@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # updating system
-apt-get update -y
-apt-get upgrade -y
+apt-get update -y -qq
+apt-get upgrade -y -qq
 # installing java jdk 8
-apt-get install -y oraclejdk8
+apt-get install -y oraclejdk8 -qq
 # installing mysql
-apt-get install -y mysql
+apt-get install -y mysql -qq
 # installing git
-apt-get install -y git
+apt-get install -y git -qq
 # installing firefox
-apt-get install -y firefox
+apt-get install -y firefox -qq
 # downloading project
 git clone https://github.com/begarco/IAE.git
 # installing payara
