@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.isima.rdvmed;
+package fr.isima.rdvmed.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author vagrant
  */
 @Entity
-@Table(name = "patients")
+@Table(name = "medecins")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Patients.findAll", query = "SELECT p FROM Patients p")
-    , @NamedQuery(name = "Patients.findById", query = "SELECT p FROM Patients p WHERE p.id = :id")
-    , @NamedQuery(name = "Patients.findByNom", query = "SELECT p FROM Patients p WHERE p.nom = :nom")
-    , @NamedQuery(name = "Patients.findByPrenom", query = "SELECT p FROM Patients p WHERE p.prenom = :prenom")})
-public class Patients implements Serializable {
+    @NamedQuery(name = "Medecins.findAll", query = "SELECT m FROM Medecins m")
+    , @NamedQuery(name = "Medecins.findById", query = "SELECT m FROM Medecins m WHERE m.id = :id")
+    , @NamedQuery(name = "Medecins.findByNom", query = "SELECT m FROM Medecins m WHERE m.nom = :nom")
+    , @NamedQuery(name = "Medecins.findByPrenom", query = "SELECT m FROM Medecins m WHERE m.prenom = :prenom")})
+public class Medecins implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,13 +48,13 @@ public class Patients implements Serializable {
     @Size(max = 64)
     @Column(name = "prenom")
     private String prenom;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
-    private Collection<Rdv> rdvCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medecin")
+    private Collection<Creneaux> creneauxCollection;
 
-    public Patients() {
+    public Medecins() {
     }
 
-    public Patients(Short id) {
+    public Medecins(Short id) {
         this.id = id;
     }
 
@@ -83,12 +83,12 @@ public class Patients implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Rdv> getRdvCollection() {
-        return rdvCollection;
+    public Collection<Creneaux> getCreneauxCollection() {
+        return creneauxCollection;
     }
 
-    public void setRdvCollection(Collection<Rdv> rdvCollection) {
-        this.rdvCollection = rdvCollection;
+    public void setCreneauxCollection(Collection<Creneaux> creneauxCollection) {
+        this.creneauxCollection = creneauxCollection;
     }
 
     @Override
@@ -101,10 +101,10 @@ public class Patients implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Patients)) {
+        if (!(object instanceof Medecins)) {
             return false;
         }
-        Patients other = (Patients) object;
+        Medecins other = (Medecins) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -113,7 +113,7 @@ public class Patients implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.isima.rdvmed.Patients[ id=" + id + " ]";
+        return "fr.isima.rdvmed.Medecins[ id=" + id + " ]";
     }
     
 }

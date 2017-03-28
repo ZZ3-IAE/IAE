@@ -5,11 +5,10 @@
  */
 package fr.isima.rdvmed.service;
 
-import fr.isima.rdvmed.Creneaux;
+import fr.isima.rdvmed.entity.Creneaux;
 import fr.isima.rdvmed.ejb.CreneauxEJB;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,19 +30,23 @@ public class CreneauxFacadeREST {
     private CreneauxEJB creneaux;
 
     @POST    
+    @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public void create(Creneaux entity) {
-        creneaux.create(entity);
+    public Creneaux create(Creneaux entity) {
+        return creneaux.create(entity);
     }
 
     @PUT
     @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Short id, Creneaux entity) {
-        creneaux.edit(entity);
+    public Creneaux edit(@PathParam("id") Short id, Creneaux entity) {
+        entity.setId(id);
+        return creneaux.edit(entity);
     }
 
     @DELETE
+    @Produces({MediaType.APPLICATION_JSON})
     @Path("{id}")
     public void remove(@PathParam("id") Short id) {
         creneaux.remove(creneaux.find(id));

@@ -5,7 +5,7 @@
  */
 package fr.isima.rdvmed.ejb;
 
-import fr.isima.rdvmed.Rdv;
+import fr.isima.rdvmed.entity.Rdv;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -27,8 +27,8 @@ public class RdvEJB extends AbstractFacade<Rdv> {
     }
 
     @Override
-    public void create(Rdv entity) {
-        super.create(entity);
+    public Rdv create(Rdv entity) {
+        return super.create(entity);
     }
 
     public void edit(Short id, Rdv entity) {

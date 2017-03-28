@@ -5,11 +5,10 @@
  */
 package fr.isima.rdvmed.service;
 
-import fr.isima.rdvmed.Rdv;
+import fr.isima.rdvmed.entity.Rdv;
 import fr.isima.rdvmed.ejb.RdvEJB;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,19 +30,23 @@ public class RdvFacadeREST {
     private RdvEJB rdv;
 
     @POST    
+    @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public void create(Rdv entity) {
-        rdv.create(entity);
+    public Rdv create(Rdv entity) {
+        return rdv.create(entity);
     }
 
     @PUT
     @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Short id, Rdv entity) {
-        rdv.edit(entity);
+    public Rdv edit(@PathParam("id") Short id, Rdv entity) {
+        entity.setId(id);
+        return rdv.edit(entity);
     }
 
     @DELETE
+    @Produces({MediaType.APPLICATION_JSON})
     @Path("{id}")
     public void remove(@PathParam("id") Short id) {
         rdv.remove(rdv.find(id));

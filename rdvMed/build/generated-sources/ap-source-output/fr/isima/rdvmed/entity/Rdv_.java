@@ -1,13 +1,13 @@
-package fr.isima.rdvmed;
+package fr.isima.rdvmed.entity;
 
-import fr.isima.rdvmed.Creneaux;
-import fr.isima.rdvmed.Patients;
+import fr.isima.rdvmed.entity.Creneaux;
+import fr.isima.rdvmed.entity.Patients;
 import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-03-28T17:14:17")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-03-28T12:30:03")
 @StaticMetamodel(Rdv.class)
 public class Rdv_ { 
 

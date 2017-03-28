@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.isima.rdvmed;
+package fr.isima.rdvmed.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,27 +17,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author vagrant
  */
 @Entity
-@Table(name = "creneaux")
+@Table(name = "rdv")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Creneaux.findAll", query = "SELECT c FROM Creneaux c")
-    , @NamedQuery(name = "Creneaux.findById", query = "SELECT c FROM Creneaux c WHERE c.id = :id")
-    , @NamedQuery(name = "Creneaux.findByDebut", query = "SELECT c FROM Creneaux c WHERE c.debut = :debut")
-    , @NamedQuery(name = "Creneaux.findByFin", query = "SELECT c FROM Creneaux c WHERE c.fin = :fin")})
-public class Creneaux implements Serializable {
+    @NamedQuery(name = "Rdv.findAll", query = "SELECT r FROM Rdv r")
+    , @NamedQuery(name = "Rdv.findById", query = "SELECT r FROM Rdv r WHERE r.id = :id")
+    , @NamedQuery(name = "Rdv.findByDate", query = "SELECT r FROM Rdv r WHERE r.date = :date")})
+public class Rdv implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,31 +44,26 @@ public class Creneaux implements Serializable {
     private Short id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "debut")
+    @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date debut;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "fin")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "creneau")
-    private Collection<Rdv> rdvCollection;
-    @JoinColumn(name = "medecin", referencedColumnName = "id")
+    private Date date;
+    @JoinColumn(name = "patient", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Medecins medecin;
+    private Patients patient;
+    @JoinColumn(name = "creneau", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Creneaux creneau;
 
-    public Creneaux() {
+    public Rdv() {
     }
 
-    public Creneaux(Short id) {
+    public Rdv(Short id) {
         this.id = id;
     }
 
-    public Creneaux(Short id, Date debut, Date fin) {
+    public Rdv(Short id, Date date) {
         this.id = id;
-        this.debut = debut;
-        this.fin = fin;
+        this.date = date;
     }
 
     public Short getId() {
@@ -84,37 +74,28 @@ public class Creneaux implements Serializable {
         this.id = id;
     }
 
-    public Date getDebut() {
-        return debut;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDebut(Date debut) {
-        this.debut = debut;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Date getFin() {
-        return fin;
+    public Patients getPatient() {
+        return patient;
     }
 
-    public void setFin(Date fin) {
-        this.fin = fin;
+    public void setPatient(Patients patient) {
+        this.patient = patient;
     }
 
-    @XmlTransient
-    public Collection<Rdv> getRdvCollection() {
-        return rdvCollection;
+    public Creneaux getCreneau() {
+        return creneau;
     }
 
-    public void setRdvCollection(Collection<Rdv> rdvCollection) {
-        this.rdvCollection = rdvCollection;
-    }
-
-    public Medecins getMedecin() {
-        return medecin;
-    }
-
-    public void setMedecin(Medecins medecin) {
-        this.medecin = medecin;
+    public void setCreneau(Creneaux creneau) {
+        this.creneau = creneau;
     }
 
     @Override
@@ -127,10 +108,10 @@ public class Creneaux implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Creneaux)) {
+        if (!(object instanceof Rdv)) {
             return false;
         }
-        Creneaux other = (Creneaux) object;
+        Rdv other = (Rdv) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -139,7 +120,7 @@ public class Creneaux implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.isima.rdvmed.Creneaux[ id=" + id + " ]";
+        return "fr.isima.rdvmed.Rdv[ id=" + id + " ]";
     }
     
 }

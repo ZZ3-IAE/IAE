@@ -5,11 +5,10 @@
  */
 package fr.isima.rdvmed.service;
 
-import fr.isima.rdvmed.Patients;
+import fr.isima.rdvmed.entity.Patients;
 import fr.isima.rdvmed.ejb.PatientsEJB;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,19 +30,23 @@ public class PatientsFacadeREST {
     private PatientsEJB patients;
 
     @POST
+    @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public void create(Patients entity) {
-        patients.create(entity);
+    public Patients create(Patients entity) {
+        return patients.create(entity);
     }
 
     @PUT
     @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Short id, Patients entity) {
-        patients.edit(entity);
+    public Patients edit(@PathParam("id") Short id, Patients entity) {
+        entity.setId(id);
+        return patients.edit(entity);
     }
 
     @DELETE
+    @Produces({MediaType.APPLICATION_JSON})
     @Path("{id}")
     public void remove(@PathParam("id") Short id) {
         patients.remove(patients.find(id));
