@@ -24,7 +24,7 @@ echo "copie de payara"
 pwd
 ls -l
 # driver jdbc
-cp IAE/matos/mysql-jdbc.jar payara41/glasfish/lib
+cp IAE/matos/mysql-jdbc.jar payara41/glassfish/lib
 # creation of database
 mysql -u root --password=iae2016 < IAE/matos/script.sql
 # starting payara
