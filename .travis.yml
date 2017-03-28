@@ -1,7 +1,7 @@
 language: java
 sudo: true
 before_install:
-- chmod a+rwx deploy.sh test.sh
+- chmod a+rwx deploy.sh
 script:
 - sudo "./deploy.sh"
 deploy:
