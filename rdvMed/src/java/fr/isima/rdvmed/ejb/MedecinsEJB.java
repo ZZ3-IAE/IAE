@@ -5,7 +5,7 @@
  */
 package fr.isima.rdvmed.ejb;
 
-import fr.isima.rdvmed.Medecins;
+import fr.isima.rdvmed.entity.Medecins;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,8 +26,8 @@ public class MedecinsEJB extends AbstractFacade<Medecins> {
     }
     
     @Override
-    public void create(Medecins entity) {
-        super.create(entity);
+    public Medecins create(Medecins entity) {
+        return super.create(entity);
     }
     
     public void edit(Short id, Medecins entity) {

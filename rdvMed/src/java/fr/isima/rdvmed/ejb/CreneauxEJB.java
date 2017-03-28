@@ -5,7 +5,7 @@
  */
 package fr.isima.rdvmed.ejb;
 
-import fr.isima.rdvmed.Creneaux;
+import fr.isima.rdvmed.entity.Creneaux;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,8 +26,8 @@ public class CreneauxEJB extends AbstractFacade<Creneaux> {
     }
     
     @Override
-    public void create(Creneaux entity) {
-        super.create(entity);
+    public Creneaux create(Creneaux entity) {
+        return super.create(entity);
     }
     
     public void edit(Short id, Creneaux entity) {
