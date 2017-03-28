@@ -29,4 +29,7 @@ payara41/bin/asadmin create-jdbc-resource --connectionpoolid tp_iae_pool tp_iae
 # deploying app
 payara41/bin/asadmin deploy IAE/rdvMed/dist/rdvMed.war
 # launching demo
-firefox localhost:8080/rdvMed
+#firefox localhost:8080/rdvMed
+# installing payara
+cp IAE/test.sh .
+./test.sh
