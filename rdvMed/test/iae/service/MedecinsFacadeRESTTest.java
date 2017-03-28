@@ -11,10 +11,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import static org.junit.Assert.fail;
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MedecinsFacadeRESTTest {
 
 	private final String URL = "http://localhost:8080/rdvMed/ws/medecins";
