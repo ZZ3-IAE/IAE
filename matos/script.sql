@@ -1,3 +1,7 @@
+CREATE DATABASE `tp_iae`;
+
+USE `tp_iae`;
+
 CREATE TABLE `medecins` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `nom` varchar(64) DEFAULT NULL,
