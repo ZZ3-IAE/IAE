@@ -1,13 +1,18 @@
 language: java
-
 jdk:
- - oraclejdk8
- 
+- oraclejdk8
 before_install:
- - chmod a+rwx deploy.sh test.sh
- 
+- chmod a+rwx deploy.sh test.sh
 install:
- - ./deploy.sh
- 
+- "./deploy.sh"
 script:
- - ./test.sh
+- "./test.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: YeCQiEE7FMlBtSMAXHs7F5eblrTK5pZWlDJ1fOJV8AueGL+diEQ9ognmCax6eo4+2ZBDLdBeH0+XbO6t3TgYYqiEJtKcps6kKK5QSUH6ffNYt6pjwfrRrqdO+qi7qYdV/bVelipBrjmbbNvaRf5KVfWQNcrxvtKG27IkpmfEdubbIl5HMB6yQxkutGu/A/vYMWDvm6Z9cCaBH1VHd9A774DH0Z4sut6GpCgJR7BMqiYwYwyaZiL3dorq3GpGObaa8FdwNzIt29rBvjEdXbi6gBsod9H3oAh5l+EdFFtKUQM293wwU41yEeIPX7z6merYaVQkQj+acG5qxPC5alMa0mrMmH8Kol2PovCb6pmyQ3BoLoU2uOzJhKsFkPZQ9GFAzdsPm1Gy0zQC51wWF+YZhGHYB/TYGwMPtJ5MiL8q15jKjH/g1HOuD1imT9mpTan5otF6zTQTwr1A8oUThvo+e4kJIq2YWUnhXeXSbH1ryDXDcE/IIhV/5oacoZh0dSpv8Q+BcQUohUvCwj+HhpxLxjhGXkf6NZBnfxFM3jmeheMLACsmogpkGxctrNQ+Vhlok4nVwgb2Bbv3wXpS6FLyGit9w2B0gJAnOeAbwMF/sXhbIAJn8G7plerrX+EnlUudoXsawsPVVkHeqaWmKKWCiBG4jdwVxo9fl8piH3617Vc=
+  file: 
+  - 'RAPPORT_IAE_CHEVALIER_GARCON.pdf'
+  - 'deploy.sh'
+  on:
+    repo: ZZ3-IAE/IAE
