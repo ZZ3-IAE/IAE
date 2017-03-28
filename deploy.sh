@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# updating system
-apt-get update -y -qq
-apt-get upgrade -y -qq
+# updating system only if needed
+# apt-get update -y -qq
+# apt-get upgrade -y -qq
 # installing java jdk 8
 apt-get install -y oraclejdk8 -qq
 # installing mysql
