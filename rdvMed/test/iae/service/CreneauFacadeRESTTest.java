@@ -1,6 +1,6 @@
 package iae.service;
 
-import fr.isima.rdvmed.Creneaux;
+import fr.isima.rdvmed.entity.Creneaux;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.Date;
