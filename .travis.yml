@@ -1,7 +1,5 @@
 language: java
 sudo: true
-jdk:
-- oraclejdk8
 before_install:
 - chmod a+rwx deploy.sh test.sh
 script:
