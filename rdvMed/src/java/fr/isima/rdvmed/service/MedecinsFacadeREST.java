@@ -49,8 +49,16 @@ public class MedecinsFacadeREST {
     @DELETE
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public void remove(@PathParam("id") Short id) {
-        medecins.remove(medecins.find(id));
+    public Response remove(@PathParam("id") Short id) {
+        Medecins med = medecins.find(id);
+        Response r;
+        if(med!=null) {
+            medecins.remove(med);
+            r = Response.ok().build();
+        } else {
+            r = Response.notModified().build();
+        }
+        return r;
     }
 
     @GET
