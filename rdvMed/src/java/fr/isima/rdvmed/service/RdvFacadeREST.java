@@ -45,7 +45,7 @@ public class RdvFacadeREST {
     @Consumes({MediaType.APPLICATION_JSON})
     public Rdv edit(@PathParam("id") Short id, Rdv entity) {
         entity.setId(id);
-        return rdv.edit(entity);
+        return rdv.edit(id, entity);
     }
 
     @DELETE
