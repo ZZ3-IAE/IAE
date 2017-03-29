@@ -1,6 +1,8 @@
 package iae.service;
 
-import fr.isima.rdvmed.entity.Medecins;
+import fr.isima.rdvmed.entity.Creneaux;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,36 +17,36 @@ import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MedecinsFacadeRESTTest {
+public class CreneauxFacadeRESTTest {
 
-	private final String URL = "http://localhost:8080/rdvMed/ws/medecins";
+	private final String URL = "http://localhost:8080/rdvMed/ws/creneaux";
 
 	private Client client;
         
         private static short id = 0;
-        private String CLEF;
-
-
+        private final Calendar cal = new GregorianCalendar();
+        
 	@Before
 	public void setup() {
             client = ClientBuilder.newClient();
-            CLEF = "TEST";
 	}
 
 	@Test
 	public void create() {
+            
             WebTarget target = client.target(URL);
 
-            Medecins m = new Medecins();
-            m.setNom(CLEF);
-
+            Creneaux c = new Creneaux();
+            c.setDebut(cal.getTime());
+            c.setFin(cal.getTime());
+            
             Response response = target.request().post(
-                            Entity.entity(m, MediaType.APPLICATION_JSON));
+                            Entity.entity(c, MediaType.APPLICATION_JSON));
 
             if (response.getStatus() != 200) {
                 fail("RESPONSE STATUS" + response.getStatus());
             }else{
-                Medecins created = response.readEntity(Medecins.class);
+                Creneaux created = response.readEntity(Creneaux.class);
                 id = created.getId();
             }
 	}
@@ -92,9 +94,12 @@ public class MedecinsFacadeRESTTest {
 	public void update() {
 		WebTarget target = client.target(URL + "/" + id);
 
-		Medecins m = new Medecins();
+		Creneaux c = new Creneaux();
+                c.setDebut(cal.getTime());
+                c.setFin(cal.getTime());
+            
 		Response response = target.request().put(
-				Entity.entity(m, MediaType.APPLICATION_JSON));
+				Entity.entity(c, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != 200) {
 			fail("RESPONSE STATUS" + response.getStatus());
 		}

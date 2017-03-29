@@ -1,6 +1,6 @@
 package iae.service;
 
-import fr.isima.rdvmed.entity.Medecins;
+import fr.isima.rdvmed.entity.Patients;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,36 +15,32 @@ import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MedecinsFacadeRESTTest {
+public class PatientsFacadeRESTTest {
 
-	private final String URL = "http://localhost:8080/rdvMed/ws/medecins";
+	private final String URL = "http://localhost:8080/rdvMed/ws/patients";
 
 	private Client client;
         
         private static short id = 0;
-        private String CLEF;
-
 
 	@Before
 	public void setup() {
             client = ClientBuilder.newClient();
-            CLEF = "TEST";
 	}
 
 	@Test
 	public void create() {
             WebTarget target = client.target(URL);
 
-            Medecins m = new Medecins();
-            m.setNom(CLEF);
+            Patients p = new Patients();
 
             Response response = target.request().post(
-                            Entity.entity(m, MediaType.APPLICATION_JSON));
+                            Entity.entity(p, MediaType.APPLICATION_JSON));
 
             if (response.getStatus() != 200) {
                 fail("RESPONSE STATUS" + response.getStatus());
             }else{
-                Medecins created = response.readEntity(Medecins.class);
+                Patients created = response.readEntity(Patients.class);
                 id = created.getId();
             }
 	}
@@ -92,9 +88,9 @@ public class MedecinsFacadeRESTTest {
 	public void update() {
 		WebTarget target = client.target(URL + "/" + id);
 
-		Medecins m = new Medecins();
+		Patients p = new Patients();
 		Response response = target.request().put(
-				Entity.entity(m, MediaType.APPLICATION_JSON));
+				Entity.entity(p, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != 200) {
 			fail("RESPONSE STATUS" + response.getStatus());
 		}

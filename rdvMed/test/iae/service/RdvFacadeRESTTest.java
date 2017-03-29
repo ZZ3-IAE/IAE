@@ -1,6 +1,8 @@
 package iae.service;
 
-import fr.isima.rdvmed.entity.Medecins;
+import fr.isima.rdvmed.entity.Rdv;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,36 +17,35 @@ import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MedecinsFacadeRESTTest {
+public class RdvFacadeRESTTest {
 
-	private final String URL = "http://localhost:8080/rdvMed/ws/medecins";
+	private final String URL = "http://localhost:8080/rdvMed/ws/rdv";
 
 	private Client client;
         
         private static short id = 0;
-        private String CLEF;
+        private final Calendar cal = new GregorianCalendar();
 
 
 	@Before
 	public void setup() {
             client = ClientBuilder.newClient();
-            CLEF = "TEST";
 	}
 
 	@Test
 	public void create() {
             WebTarget target = client.target(URL);
 
-            Medecins m = new Medecins();
-            m.setNom(CLEF);
+            Rdv r = new Rdv();
+            r.setDate(cal.getTime());
 
             Response response = target.request().post(
-                            Entity.entity(m, MediaType.APPLICATION_JSON));
+                            Entity.entity(r, MediaType.APPLICATION_JSON));
 
             if (response.getStatus() != 200) {
                 fail("RESPONSE STATUS" + response.getStatus());
             }else{
-                Medecins created = response.readEntity(Medecins.class);
+                Rdv created = response.readEntity(Rdv.class);
                 id = created.getId();
             }
 	}
@@ -92,9 +93,11 @@ public class MedecinsFacadeRESTTest {
 	public void update() {
 		WebTarget target = client.target(URL + "/" + id);
 
-		Medecins m = new Medecins();
+		Rdv r = new Rdv();
+                r.setDate(cal.getTime());
+                
 		Response response = target.request().put(
-				Entity.entity(m, MediaType.APPLICATION_JSON));
+				Entity.entity(r, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != 200) {
 			fail("RESPONSE STATUS" + response.getStatus());
 		}
