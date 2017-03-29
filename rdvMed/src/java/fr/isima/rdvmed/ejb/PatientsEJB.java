@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class PatientsEJB extends AbstractFacade<Patients> {
 
-    @PersistenceContext(unitName = "rdvMedPU")
+    @PersistenceContext
     private EntityManager em;
 
     public PatientsEJB() {
