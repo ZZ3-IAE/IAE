@@ -10,8 +10,6 @@ apt-get -y install mysql-server -qq
 mysqladmin -u root password iae2016
 # installing git
 apt-get install -y git -qq
-# installing firefox
-apt-get install -y netbeans -qq
 # downloading project
 git clone https://github.com/begarco/IAE.git
 # installing payara
@@ -28,14 +26,13 @@ payara41/bin/asadmin ping-connection-pool tp_iae_pool
 # creating a data source
 payara41/bin/asadmin create-jdbc-resource --connectionpoolid tp_iae_pool tp_iae
 # build
-ls -lhaR ~
 cd IAE/rdvMed
 chmod +rwx ../matos/apache-ant-1.10.1/bin/ant
-../matos/apache-ant-1.10.1/bin/ant -Dlibs.CopyLibs.classpath=../matos/org-netbeans-modules-java-j2seproject-copylibstask.jar dist
+../matos/apache-ant-1.10.1/bin/ant -Dlibs.CopyLibs.classpath=../matos/org-netbeans-modules-java-j2seproject-copylibstask.jar -Dlibs.eclipselink.classpath=../matos/eclipselink/eclipselink.jar:../matos/eclipselink/javax.persistence_2.1.0.v201304241213.jar:../matos/eclipselink/org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar dist
 cd ../..
 # deploying app
 payara41/bin/asadmin deploy IAE/rdvMed/dist/rdvMed.war
 # launching demo
 cd IAE/rdvMed
-../matos/apache-ant-1.10.1/bin/ant -Dlibs.CopyLibs.classpath=../matos/org-netbeans-modules-java-j2seproject-copylibstask.jar test
-../matos/apache-ant-1.10.1/bin/ant -Dlibs.CopyLibs.classpath=../matos/org-netbeans-modules-java-j2seproject-copylibstask.jar javadoc
+../matos/apache-ant-1.10.1/bin/ant -Dlibs.CopyLibs.classpath=../matos/org-netbeans-modules-java-j2seproject-copylibstask.jar -Dlibs.eclipselink.classpath=../matos/eclipselink/eclipselink.jar:../matos/eclipselink/javax.persistence_2.1.0.v201304241213.jar:../matos/eclipselink/org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar test
+../matos/apache-ant-1.10.1/bin/ant -Dlibs.CopyLibs.classpath=../matos/org-netbeans-modules-java-j2seproject-copylibstask.jar -Dlibs.eclipselink.classpath=../matos/eclipselink/eclipselink.jar:../matos/eclipselink/javax.persistence_2.1.0.v201304241213.jar:../matos/eclipselink/org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar javadoc
