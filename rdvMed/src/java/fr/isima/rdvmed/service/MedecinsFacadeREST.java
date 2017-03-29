@@ -5,6 +5,7 @@
  */
 package fr.isima.rdvmed.service;
 
+import fr.isima.rdvmed.ejb.CreneauxEJB;
 import fr.isima.rdvmed.entity.Medecins;
 import fr.isima.rdvmed.ejb.MedecinsEJB;
 import fr.isima.rdvmed.entity.Creneaux;
@@ -65,7 +66,7 @@ public class MedecinsFacadeREST {
         Medecins m = medecins.find(id);
         Collection<Creneaux> crx = null;
         if(m!=null)
-            crx = m.getCreneauxCollection();
+            crx = medecins.findAllCreneaux(m);
         return crx;
     }
 

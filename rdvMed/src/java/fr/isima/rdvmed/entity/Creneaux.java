@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,9 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Creneaux.findAll", query = "SELECT c FROM Creneaux c")
-    , @NamedQuery(name = "Creneaux.findById", query = "SELECT c FROM Creneaux c WHERE c.id = :id")
-    , @NamedQuery(name = "Creneaux.findByDebut", query = "SELECT c FROM Creneaux c WHERE c.debut = :debut")
-    , @NamedQuery(name = "Creneaux.findByFin", query = "SELECT c FROM Creneaux c WHERE c.fin = :fin")})
+    , @NamedQuery(name = "Creneaux.findById", query = "SELECT c FROM Creneaux c WHERE c.id = ?1")
+    , @NamedQuery(name = "Creneaux.findByDebut", query = "SELECT c FROM Creneaux c WHERE c.debut = ?1")
+    , @NamedQuery(name = "Creneaux.findByFin", query = "SELECT c FROM Creneaux c WHERE c.fin = ?1")
+    , @NamedQuery(name = "Creneaux.findAllMedecin", query = "SELECT c FROM Creneaux c WHERE c.medecin = ?1")})
 public class Creneaux implements Serializable {
 
     private static final long serialVersionUID = 1L;

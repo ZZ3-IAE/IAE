@@ -7,6 +7,7 @@ package fr.isima.rdvmed.ejb;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -53,6 +54,14 @@ public abstract class AbstractFacade<T> {
         q.setMaxResults(range[1] - range[0] + 1);
         q.setFirstResult(range[0]);
         return q.getResultList();
+    }
+    
+    public <T> List<T> request(String name, Class<T> resultClass, Object... args) {
+        TypedQuery<T> query = getEntityManager().createNamedQuery(name, resultClass);
+        for (int i = 0; i < args.length; i++) {
+            query.setParameter(i+1, args[i]);
+        }
+        return query.getResultList();
     }
 
     public int count() {

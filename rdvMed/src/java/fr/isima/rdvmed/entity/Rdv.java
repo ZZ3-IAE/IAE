@@ -32,8 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rdv.findAll", query = "SELECT r FROM Rdv r")
-    , @NamedQuery(name = "Rdv.findById", query = "SELECT r FROM Rdv r WHERE r.id = :id")
-    , @NamedQuery(name = "Rdv.findByDate", query = "SELECT r FROM Rdv r WHERE r.date = :date")})
+    , @NamedQuery(name = "Rdv.findById", query = "SELECT r FROM Rdv r WHERE r.id = ?1")
+    , @NamedQuery(name = "Rdv.findByDate", query = "SELECT r FROM Rdv r WHERE r.date = ?1")
+    , @NamedQuery(name = "Rdv.findAllPatient", query = "SELECT r FROM Rdv r WHERE r.patient = ?1")})
 public class Rdv implements Serializable {
 
     private static final long serialVersionUID = 1L;
