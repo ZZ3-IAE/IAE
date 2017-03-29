@@ -32,6 +32,5 @@ payara41/bin/asadmin deploy IAE/rdvMed/dist/rdvMed.war
 # launching demo
 #firefox localhost:8080/rdvMed
 # installing payara
-cp IAE/matos/test.sh .
-chmod a+rwx test.sh
-./test.sh
+cd IAE/rdvMed
+./IAE/matos/apache-ant-1.10.1/bin/ant test
