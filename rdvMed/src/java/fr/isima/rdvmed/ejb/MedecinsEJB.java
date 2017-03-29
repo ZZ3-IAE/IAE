@@ -24,7 +24,7 @@ public class MedecinsEJB extends AbstractFacade<Medecins> {
     
     private static Logger LOG = Logger.getLogger("medecins");
 
-    @PersistenceContext(unitName = "rdvMedPU")
+    @PersistenceContext
     private EntityManager em;
 
     public MedecinsEJB() {

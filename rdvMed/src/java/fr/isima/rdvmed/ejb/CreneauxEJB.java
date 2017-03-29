@@ -24,7 +24,7 @@ public class CreneauxEJB extends AbstractFacade<Creneaux> {
     
     private static Logger LOG = Logger.getLogger("creneaux");
 
-    @PersistenceContext(unitName = "rdvMedPU")
+    @PersistenceContext
     private EntityManager em;
 
     public CreneauxEJB() {
@@ -43,7 +43,7 @@ public class CreneauxEJB extends AbstractFacade<Creneaux> {
     
     public boolean remove(Short id) {
         Creneaux c = super.find(id);
-        if(c!=null && c.getRdvCollection().isEmpty())
+        if(c!=null)
             return super.remove(c);
         return false;
     }

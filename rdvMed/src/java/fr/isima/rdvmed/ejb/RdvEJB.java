@@ -21,7 +21,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class RdvEJB extends AbstractFacade<Rdv> {
 
-    @PersistenceContext(unitName = "rdvMedPU")
+    @PersistenceContext
     private EntityManager em;
     
     @EJB

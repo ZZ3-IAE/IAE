@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +57,7 @@ public class Creneaux implements Serializable {
     @Column(name = "fin")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "creneau", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "creneau")
     private Collection<Rdv> rdvCollection;
     @JoinColumn(name = "medecin", referencedColumnName = "id")
     @ManyToOne(optional = false)
