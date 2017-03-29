@@ -6,10 +6,7 @@
 package fr.isima.rdvmed.ejb;
 
 import fr.isima.rdvmed.entity.Creneaux;
-import fr.isima.rdvmed.entity.Rdv;
-import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
