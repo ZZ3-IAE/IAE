@@ -6,6 +6,7 @@
 package fr.isima.rdvmed.ejb;
 
 import fr.isima.rdvmed.entity.Creneaux;
+import fr.isima.rdvmed.entity.Medecins;
 import fr.isima.rdvmed.entity.Rdv;
 import java.util.List;
 import javax.ejb.EJB;
@@ -72,6 +73,10 @@ public class RdvEJB extends AbstractFacade<Rdv> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    public List<Creneaux> findFreeCreneaux(Medecins entity, Integer aaaa, Integer mm, Integer jj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

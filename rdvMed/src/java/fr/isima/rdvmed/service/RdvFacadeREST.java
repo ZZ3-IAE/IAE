@@ -7,6 +7,8 @@ package fr.isima.rdvmed.service;
 
 import fr.isima.rdvmed.entity.Rdv;
 import fr.isima.rdvmed.ejb.RdvEJB;
+import fr.isima.rdvmed.entity.Creneaux;
+import fr.isima.rdvmed.entity.Medecins;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -81,6 +83,14 @@ public class RdvFacadeREST {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(rdv.count());
+    }
+    
+    @POST
+    @Path("libres/{aaaa}/{mm}/{jj}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<Creneaux> libres(@PathParam("aaaa") Integer aaaa, @PathParam("mm") Integer mm, @PathParam("jj") Integer jj, Medecins entity) {
+        return rdv.findFreeCreneaux(entity, aaaa, mm, jj);
     }
 
 }
