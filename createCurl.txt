@@ -1,3 +1,0 @@
-curl -H "Content-Type: application/json" -X POST -d '{"nom":"caca","prenom":"boudin"}' http://localhost:8080/rdvMed/ws/medecins
-
-curl -H "Content-Type: application/json" -X POST -d '{"id":"1"}' http://localhost:8080/rdvMed/ws/rdv/libres/2017/04/12

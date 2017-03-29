@@ -13,7 +13,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.junit.After;
 import static org.junit.Assert.fail;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
@@ -123,7 +122,12 @@ public class CreneauxFacadeRESTTest {
 				Entity.entity(c, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != 200) {
 			fail("RESPONSE STATUS" + response.getStatus());
-		}
+		}else{
+                   Creneaux updated = response.readEntity(Creneaux.class);
+                   if(updated==null){
+                       fail("NO UPDATE");
+                   } 
+                }
 	}
 
 	@Test
