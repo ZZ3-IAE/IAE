@@ -104,7 +104,7 @@ public class MedecinsFacadeRESTTest {
 	public void delete() {
             WebTarget target = client.target(URL + "/" + id);
             Response response = target.request().delete();
-            if (response.getStatus() != 204) {
+            if (response.getStatus() != 200) {
                     fail("RESPONSE STATUS" + response.getStatus());
             }
 	}

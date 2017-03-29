@@ -1,6 +1,7 @@
 package iae.service;
 
 import fr.isima.rdvmed.entity.Creneaux;
+import fr.isima.rdvmed.entity.Medecins;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import org.junit.Before;
@@ -12,6 +13,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.junit.After;
 import static org.junit.Assert.fail;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
@@ -24,23 +26,41 @@ public class CreneauxFacadeRESTTest {
 	private Client client;
         
         private static short id = 0;
+        private static short idMedecin = 0;
+        
         private final Calendar cal = new GregorianCalendar();
         
-	@Before
+        @Before
 	public void setup() {
             client = ClientBuilder.newClient();
 	}
-
+        
 	@Test
 	public void create() {
             
-            WebTarget target = client.target(URL);
+            WebTarget target = client.target("http://localhost:8080/rdvMed/ws/medecins");
+             
+            Medecins m = new Medecins();
+            
+            Response response = target.request().post(
+                            Entity.entity(m, MediaType.APPLICATION_JSON));
+            
+            if (response.getStatus() != 200) {
+                fail("RESPONSE STATUS" + response.getStatus());
+            }else{
+                Medecins created = response.readEntity(Medecins.class);
+                idMedecin = created.getId();
+            }
+            
+            
+            target = client.target(URL);
 
             Creneaux c = new Creneaux();
             c.setDebut(cal.getTime());
             c.setFin(cal.getTime());
+            c.setMedecin(new Medecins(idMedecin));
             
-            Response response = target.request().post(
+            response = target.request().post(
                             Entity.entity(c, MediaType.APPLICATION_JSON));
 
             if (response.getStatus() != 200) {
@@ -97,6 +117,7 @@ public class CreneauxFacadeRESTTest {
 		Creneaux c = new Creneaux();
                 c.setDebut(cal.getTime());
                 c.setFin(cal.getTime());
+                c.setMedecin(new Medecins(idMedecin));
             
 		Response response = target.request().put(
 				Entity.entity(c, MediaType.APPLICATION_JSON));
@@ -109,7 +130,13 @@ public class CreneauxFacadeRESTTest {
 	public void delete() {
             WebTarget target = client.target(URL + "/" + id);
             Response response = target.request().delete();
-            if (response.getStatus() != 204) {
+            if (response.getStatus() != 200) {
+                    fail("RESPONSE STATUS" + response.getStatus());
+            }
+            
+            target = client.target("http://localhost:8080/rdvMed/ws/medecins/" + idMedecin);
+            response = target.request().delete();
+            if (response.getStatus() != 200) {
                     fail("RESPONSE STATUS" + response.getStatus());
             }
 	}
