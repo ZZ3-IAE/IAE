@@ -22,7 +22,7 @@ import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestLibres {
+public class RdvPlusTest {
 
 	private final String URL = "http://localhost:8080/rdvMed/ws/rdv";
 
@@ -197,16 +197,6 @@ public class TestLibres {
         c.setFin(cal.getTime());
         c.setMedecin(new Medecins(idMedecin));
 
-        response = target.request().post(
-                        Entity.entity(c, MediaType.APPLICATION_JSON));
-
-        if (response.getStatus() != 200) {
-            fail("[Creneau] RESPONSE STATUS" + response.getStatus());
-        }else{
-            Creneaux created = response.readEntity(Creneaux.class);
-            idCreneau = created.getId();
-        }
-
         target = client.target(URL);
 
         Rdv r1 = new Rdv();
@@ -223,6 +213,7 @@ public class TestLibres {
         }else{
             Rdv created = response.readEntity(Rdv.class);
             idRdv1 = created.getId();
+            idCreneau = created.getCreneau().getId();
         }
         
         Rdv r2 = new Rdv();
@@ -244,20 +235,8 @@ public class TestLibres {
         if (response.getStatus() != 200) {
                 fail("RESPONSE STATUS" + response.getStatus());
         }
-        
-        target = client.target(URL + "/" + idRdv2);
-        response = target.request().delete();
-        if (response.getStatus() != 200) {
-                fail("RESPONSE STATUS" + response.getStatus());
-        }
 
         target = client.target("http://localhost:8080/rdvMed/ws/patients/" + idPatient);
-        response = target.request().delete();
-        if (response.getStatus() != 200) {
-                fail("RESPONSE STATUS" + response.getStatus());
-        }
-        
-        target = client.target("http://localhost:8080/rdvMed/ws/creneaux/" + idCreneau);
         response = target.request().delete();
         if (response.getStatus() != 200) {
                 fail("RESPONSE STATUS" + response.getStatus());
