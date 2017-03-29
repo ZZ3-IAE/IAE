@@ -122,7 +122,12 @@ public class CreneauxFacadeRESTTest {
 				Entity.entity(c, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != 200) {
 			fail("RESPONSE STATUS" + response.getStatus());
-		}
+		}else{
+                   Creneaux updated = response.readEntity(Creneaux.class);
+                   if(updated==null){
+                       fail("NO UPDATE");
+                   } 
+                }
 	}
 
 	@Test

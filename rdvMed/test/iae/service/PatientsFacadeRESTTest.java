@@ -93,7 +93,12 @@ public class PatientsFacadeRESTTest {
 				Entity.entity(p, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != 200) {
 			fail("RESPONSE STATUS" + response.getStatus());
-		}
+		}else{
+                   Patients updated = response.readEntity(Patients.class);
+                   if(updated==null){
+                       fail("NO UPDATE");
+                   } 
+                }
 	}
 
 	@Test
