@@ -27,10 +27,13 @@ payara41/bin/asadmin create-jdbc-connection-pool --datasourceclassname com.mysql
 payara41/bin/asadmin ping-connection-pool tp_iae_pool
 # creating a data source
 payara41/bin/asadmin create-jdbc-resource --connectionpoolid tp_iae_pool tp_iae
+# build
+cd IAE/rdvMed
+../matos/apache-ant-1.10.1/bin/ant dist
+cd ../..
 # deploying app
 payara41/bin/asadmin deploy IAE/rdvMed/dist/rdvMed.war
 # launching demo
-#firefox localhost:8080/rdvMed
-# installing payara
 cd IAE/rdvMed
-./IAE/matos/apache-ant-1.10.1/bin/ant test
+../matos/apache-ant-1.10.1/bin/ant test
+../matos/apache-ant-1.10.1/bin/ant javadoc
