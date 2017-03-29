@@ -11,7 +11,7 @@ mysqladmin -u root password iae2016
 # installing git
 apt-get install -y git -qq
 # installing firefox
-apt-get install -y firefox -qq
+apt-get install -y netbeans -qq
 # downloading project
 git clone https://github.com/begarco/IAE.git
 # installing payara
