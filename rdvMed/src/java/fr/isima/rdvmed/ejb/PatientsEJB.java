@@ -30,12 +30,16 @@ public class PatientsEJB extends AbstractFacade<Patients> {
         return super.create(entity);
     }
 
-    public void edit(Short id, Patients entity) {
+    public Patients edit(Short id, Patients entity) {
         super.edit(entity);
+        return super.find(id);
     }
 
-    public void remove(Short id) {
-        super.remove(super.find(id));
+    public boolean remove(Short id) {
+        Patients p = super.find(id);
+        if(p!=null && p.getRdvCollection().isEmpty())
+            return super.remove(p);
+        return false;
     }
 
     public Patients find(Short id) {

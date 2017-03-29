@@ -7,6 +7,8 @@ package fr.isima.rdvmed.service;
 
 import fr.isima.rdvmed.entity.Medecins;
 import fr.isima.rdvmed.ejb.MedecinsEJB;
+import fr.isima.rdvmed.entity.Creneaux;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -50,15 +52,21 @@ public class MedecinsFacadeREST {
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response remove(@PathParam("id") Short id) {
-        Medecins med = medecins.find(id);
-        Response r;
-        if(med!=null) {
-            medecins.remove(med);
+        Response r = Response.notModified().build();
+        if(medecins.remove(id))
             r = Response.ok().build();
-        } else {
-            r = Response.notModified().build();
-        }
         return r;
+    }
+
+    @GET
+    @Path("creneaux/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Collection<Creneaux> creneaux(@PathParam("id") Short id) {
+        Medecins m = medecins.find(id);
+        Collection<Creneaux> crx = null;
+        if(m!=null)
+            crx = m.getCreneauxCollection();
+        return crx;
     }
 
     @GET

@@ -7,6 +7,8 @@ package fr.isima.rdvmed.service;
 
 import fr.isima.rdvmed.entity.Patients;
 import fr.isima.rdvmed.ejb.PatientsEJB;
+import fr.isima.rdvmed.entity.Rdv;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -50,15 +52,21 @@ public class PatientsFacadeREST {
     @Produces({MediaType.APPLICATION_JSON})
     @Path("{id}")
     public Response remove(@PathParam("id") Short id) {
-        Patients pat = patients.find(id);
-        Response r;
-        if(pat!=null) {
-            patients.remove(pat);
+        Response r = Response.notModified().build();
+        if(patients.remove(id))
             r = Response.ok().build();
-        } else {
-            r = Response.notModified().build();
-        }
         return r;
+    }
+
+    @GET
+    @Path("rdv/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Collection<Rdv> rdv(@PathParam("id") Short id) {
+        Patients p = patients.find(id);
+        Collection<Rdv> rdv = null;
+        if(p!=null)
+            rdv = p.getRdvCollection();
+        return rdv;
     }
 
     @GET

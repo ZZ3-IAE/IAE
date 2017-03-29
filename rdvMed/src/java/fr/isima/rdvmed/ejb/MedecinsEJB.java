@@ -5,8 +5,12 @@
  */
 package fr.isima.rdvmed.ejb;
 
+import fr.isima.rdvmed.entity.Creneaux;
 import fr.isima.rdvmed.entity.Medecins;
+import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +21,8 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class MedecinsEJB extends AbstractFacade<Medecins> {
+    
+    private static Logger LOG = Logger.getLogger("medecins");
 
     @PersistenceContext(unitName = "rdvMedPU")
     private EntityManager em;
@@ -30,12 +36,17 @@ public class MedecinsEJB extends AbstractFacade<Medecins> {
         return super.create(entity);
     }
     
-    public void edit(Short id, Medecins entity) {
+    public Medecins edit(Short id, Medecins entity) {
         super.edit(entity);
+        return super.find(id);
     }
     
-    public void remove(Short id) {
-        super.remove(super.find(id));
+    public boolean remove(Short id) {
+        Medecins m = find(id);
+        
+        if(m!=null && m.getCreneauxCollection().isEmpty())
+            return super.remove(m);
+        return false;
     }
     
     public Medecins find(Short id) {

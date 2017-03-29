@@ -50,14 +50,9 @@ public class RdvFacadeREST {
     @Produces({MediaType.APPLICATION_JSON})
     @Path("{id}")
     public Response remove(@PathParam("id") Short id) {
-        Rdv rrdv = rdv.find(id);
-        Response r;
-        if(rrdv!=null) {
-            rdv.remove(rrdv);
+        Response r = Response.notModified().build();
+        if(rdv.remove(id))
             r = Response.ok().build();
-        } else {
-            r = Response.notModified().build();
-        }
         return r;
     }
 

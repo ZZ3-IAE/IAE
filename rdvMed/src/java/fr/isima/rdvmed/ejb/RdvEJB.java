@@ -5,8 +5,10 @@
  */
 package fr.isima.rdvmed.ejb;
 
+import fr.isima.rdvmed.entity.Creneaux;
 import fr.isima.rdvmed.entity.Rdv;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,6 +23,9 @@ public class RdvEJB extends AbstractFacade<Rdv> {
 
     @PersistenceContext(unitName = "rdvMedPU")
     private EntityManager em;
+    
+    @EJB
+    private CreneauxEJB creneaux;
 
     public RdvEJB() {
         super(Rdv.class);
@@ -28,15 +33,23 @@ public class RdvEJB extends AbstractFacade<Rdv> {
 
     @Override
     public Rdv create(Rdv entity) {
+        Creneaux c = creneaux.create(entity.getCreneau());
+        entity.setCreneau(c);
         return super.create(entity);
     }
 
-    public void edit(Short id, Rdv entity) {
+    public Rdv edit(Short id, Rdv entity) {
         super.edit(entity);
+        return super.find(id);
     }
 
-    public void remove(Short id) {
-        super.remove(super.find(id));
+    public boolean remove(Short id) {
+        Rdv r = super.find(id);
+        if(r!=null) {
+            super.remove(r);
+            return creneaux.remove(r.getCreneau().getId());
+        }
+        return false;
     }
 
     public Rdv find(Short id) {

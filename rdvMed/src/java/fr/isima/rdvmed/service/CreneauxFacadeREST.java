@@ -7,6 +7,8 @@ package fr.isima.rdvmed.service;
 
 import fr.isima.rdvmed.entity.Creneaux;
 import fr.isima.rdvmed.ejb.CreneauxEJB;
+import fr.isima.rdvmed.entity.Rdv;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -50,15 +52,21 @@ public class CreneauxFacadeREST {
     @Produces({MediaType.APPLICATION_JSON})
     @Path("{id}")
     public Response remove(@PathParam("id") Short id) {
-        Creneaux cr = creneaux.find(id);
-        Response r;
-        if(cr!=null) {
-            creneaux.remove(cr);
+        Response r = Response.notModified().build();
+        if(creneaux.remove(id))
             r = Response.ok().build();
-        } else {
-            r = Response.notModified().build();
-        }
         return r;
+    }
+
+    @GET
+    @Path("rdv/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Collection<Rdv> rdv(@PathParam("id") Short id) {
+        Creneaux p = creneaux.find(id);
+        Collection<Rdv> rdv = null;
+        if(p!=null)
+            rdv = p.getRdvCollection();
+        return rdv;
     }
 
     @GET
