@@ -1,9 +1,13 @@
 package iae.service;
 
+import fr.isima.rdvmed.entity.Creneaux;
+import fr.isima.rdvmed.entity.Medecins;
+import fr.isima.rdvmed.entity.Patients;
 import fr.isima.rdvmed.entity.Rdv;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 
 import javax.ws.rs.client.Client;
@@ -24,6 +28,10 @@ public class RdvFacadeRESTTest {
 	private Client client;
         
         private static short id = 0;
+        private static short idCreneau = 0;
+        private static short idMedecin = 0;
+        private static short idPatient = 0;
+        
         private final Calendar cal = new GregorianCalendar();
 
 
@@ -34,12 +42,60 @@ public class RdvFacadeRESTTest {
 
 	@Test
 	public void create() {
-            WebTarget target = client.target(URL);
+            WebTarget target = client.target("http://localhost:8080/rdvMed/ws/medecins");
+             
+            Medecins m = new Medecins();
+            
+            Response response = target.request().post(
+                            Entity.entity(m, MediaType.APPLICATION_JSON));
+            
+            if (response.getStatus() != 200) {
+                fail("RESPONSE STATUS" + response.getStatus());
+            }else{
+                Medecins created = response.readEntity(Medecins.class);
+                idMedecin = created.getId();
+            }
+            
+            target = client.target("http://localhost:8080/rdvMed/ws/patients");
+             
+            Patients p = new Patients();
+            
+            response = target.request().post(
+                            Entity.entity(p, MediaType.APPLICATION_JSON));
+            
+            if (response.getStatus() != 200) {
+                fail("RESPONSE STATUS" + response.getStatus());
+            }else{
+                Patients created = response.readEntity(Patients.class);
+                idPatient = created.getId();
+            }
+            
+            
+            target = client.target("http://localhost:8080/rdvMed/ws/creneaux");
+             
+            Creneaux c = new Creneaux();
+            c.setDebut(cal.getTime());
+            c.setFin(cal.getTime());
+            c.setMedecin(new Medecins(idMedecin));
+            
+            response = target.request().post(
+                            Entity.entity(c, MediaType.APPLICATION_JSON));
+            
+            if (response.getStatus() != 200) {
+                fail("RESPONSE STATUS" + response.getStatus());
+            }else{
+                Creneaux created = response.readEntity(Creneaux.class);
+                idCreneau = created.getId();
+            }
+            
+            target = client.target(URL);
 
             Rdv r = new Rdv();
             r.setDate(cal.getTime());
+            r.setCreneau(new Creneaux(idCreneau));
+            r.setPatient(new Patients(idPatient));
 
-            Response response = target.request().post(
+            response = target.request().post(
                             Entity.entity(r, MediaType.APPLICATION_JSON));
 
             if (response.getStatus() != 200) {
@@ -96,6 +152,9 @@ public class RdvFacadeRESTTest {
 		Rdv r = new Rdv();
                 r.setDate(cal.getTime());
                 
+                r.setCreneau(new Creneaux(idCreneau));
+                r.setPatient(new Patients(idPatient));
+                
 		Response response = target.request().put(
 				Entity.entity(r, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != 200) {
@@ -107,8 +166,32 @@ public class RdvFacadeRESTTest {
 	public void delete() {
             WebTarget target = client.target(URL + "/" + id);
             Response response = target.request().delete();
-            if (response.getStatus() != 204) {
+            if (response.getStatus() != 200) {
+                    fail("RESPONSE STATUS" + response.getStatus());
+            }
+            
+            target = client.target("http://localhost:8080/rdvMed/ws/patients/" + idPatient);
+            response = target.request().delete();
+            if (response.getStatus() != 200) {
+                    fail("RESPONSE STATUS" + response.getStatus());
+            }
+            
+            target = client.target("http://localhost:8080/rdvMed/ws/creneaux/" + idCreneau);
+            response = target.request().delete();
+            if (response.getStatus() != 200) {
+                    fail("RESPONSE STATUS" + response.getStatus());
+            }
+            
+            target = client.target("http://localhost:8080/rdvMed/ws/medecins/" + idMedecin);
+            response = target.request().delete();
+            if (response.getStatus() != 200) {
                     fail("RESPONSE STATUS" + response.getStatus());
             }
 	}
+
+    private static class Creneau extends Creneaux {
+
+        public Creneau() {
+        }
+    }
 }
