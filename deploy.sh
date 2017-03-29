@@ -28,7 +28,7 @@ payara41/bin/asadmin ping-connection-pool tp_iae_pool
 # creating a data source
 payara41/bin/asadmin create-jdbc-resource --connectionpoolid tp_iae_pool tp_iae
 # build
-ls -lha ~/.netbeans
+ls -lhaR ~
 cd IAE/rdvMed
 chmod +rwx ../matos/apache-ant-1.10.1/bin/ant
 ../matos/apache-ant-1.10.1/bin/ant -Dlibs.CopyLibs.classpath=../matos/org-netbeans-modules-java-j2seproject-copylibstask.jar -Dlibs.eclipselink.classpath=../matos/eclipselink/eclipselink.jar dist
