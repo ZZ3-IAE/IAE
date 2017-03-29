@@ -24,7 +24,7 @@ public class CreneauxEJB extends AbstractFacade<Creneaux> {
     
     private static Logger LOG = Logger.getLogger("creneaux");
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "rdvMedPU")
     private EntityManager em;
 
     public CreneauxEJB() {
