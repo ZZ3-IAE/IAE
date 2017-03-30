@@ -34,5 +34,5 @@ cd ../..
 payara41/bin/asadmin deploy IAE/rdvMed/dist/rdvMed.war
 # launching demo
 cd IAE/rdvMed
-../matos/apache-ant-1.10.1/bin/ant test
+../matos/apache-ant-1.10.1/bin/ant mytest
 ../matos/apache-ant-1.10.1/bin/ant javadoc
