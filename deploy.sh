@@ -11,7 +11,7 @@ mysqladmin -u root password iae2016
 # installing git
 apt-get install -y git -qq
 # downloading project
-git clone https://github.com/begarco/IAE.git
+git clone https://github.com/ZZ3-IAE/IAE.git
 # installing payara
 cp -r IAE/matos/payara41 .
 # driver jdbc
