@@ -1,0 +1,18 @@
+Testsuite: iae.service.PatientsFacadeRESTTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.029 sec
+------------- Standard Error -----------------
+Mar 29, 2017 9:04:38 PM org.hibernate.validator.internal.util.Version <clinit>
+INFO: HV000001: Hibernate Validator 5.1.2.Final
+Mar 29, 2017 9:04:39 PM org.eclipse.persistence.jaxb.JAXBBeanValidator printValidatorInfo
+INFO: EclipseLink is using (file:/home/vagrant/IAE/matos/payara41/glassfish/modules/bean-validator.jar <no signer certificates>) as BeanValidation implementation.
+Mar 29, 2017 9:04:39 PM org.eclipse.persistence.jaxb.JAXBBeanValidator printValidatorInfo
+INFO: EclipseLink is using (file:/home/vagrant/IAE/matos/payara41/glassfish/modules/bean-validator.jar <no signer certificates>) as BeanValidation implementation.
+------------- ---------------- ---------------
+
+Testcase: count took 0.668 sec
+Testcase: create took 1.05 sec
+Testcase: delete took 0.064 sec
+Testcase: find took 0.053 sec
+Testcase: findRange took 0.05 sec
+Testcase: list took 0.042 sec
+Testcase: update took 0.077 sec

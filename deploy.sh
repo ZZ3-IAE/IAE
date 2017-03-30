@@ -26,7 +26,7 @@ payara41/bin/asadmin ping-connection-pool tp_iae_pool
 # creating a data source
 payara41/bin/asadmin create-jdbc-resource --connectionpoolid tp_iae_pool tp_iae
 # build
-chmod +rwx IAE -R
+chmod +rwx . -R
 cd IAE/rdvMed
 chmod +rwx ../matos/apache-ant-1.10.1/bin/ant
 ../matos/apache-ant-1.10.1/bin/ant dist

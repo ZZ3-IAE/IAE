@@ -1,0 +1,23 @@
+Testsuite: iae.service.RdvFacadeRESTTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.091 sec
+------------- Standard Error -----------------
+Mar 29, 2017 9:04:41 PM org.hibernate.validator.internal.util.Version <clinit>
+INFO: HV000001: Hibernate Validator 5.1.2.Final
+Mar 29, 2017 9:04:41 PM org.eclipse.persistence.jaxb.JAXBBeanValidator printValidatorInfo
+INFO: EclipseLink is using (file:/home/vagrant/IAE/matos/payara41/glassfish/modules/bean-validator.jar <no signer certificates>) as BeanValidation implementation.
+Mar 29, 2017 9:04:41 PM org.eclipse.persistence.jaxb.JAXBBeanValidator printValidatorInfo
+INFO: EclipseLink is using (file:/home/vagrant/IAE/matos/payara41/glassfish/modules/bean-validator.jar <no signer certificates>) as BeanValidation implementation.
+Mar 29, 2017 9:04:41 PM org.eclipse.persistence.jaxb.JAXBBeanValidator printValidatorInfo
+INFO: EclipseLink is using (file:/home/vagrant/IAE/matos/payara41/glassfish/modules/bean-validator.jar <no signer certificates>) as BeanValidation implementation.
+Mar 29, 2017 9:04:42 PM org.eclipse.persistence.jaxb.JAXBBeanValidator printValidatorInfo
+INFO: EclipseLink is using (file:/home/vagrant/IAE/matos/payara41/glassfish/modules/bean-validator.jar <no signer certificates>) as BeanValidation implementation.
+------------- ---------------- ---------------
+
+Testcase: a_create took 1.616 sec
+Testcase: b_find took 0.079 sec
+Testcase: c_list took 0.048 sec
+Testcase: d_count took 0.068 sec
+Testcase: e_findRange took 0.04 sec
+Testcase: f_update took 0.096 sec
+Testcase: g_delete took 0.06 sec
+Testcase: g_deleteUnauthorized took 0.047 sec
