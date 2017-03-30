@@ -68,18 +68,21 @@
     nbproject/build-impl.xml file. 
 
     -->
-	<target name="mycompile">
-		<echo message="Compilation en cours ..."/>
-		<mkdir dir="dossier_class"/>
-		<javac srcdir="."
-		 includeantruntime="false"
-         destdir="dossier_class"
-		 encoding="ISO-8859-1"
-         debug="on">
-		<classpath>
-        	<fileset dir="../matos/payara41/glassfish/modules" includes="*.jar" />
-        	<fileset dir="../matos" includes="*.jar" />
-      	</classpath>
-		</javac>
-	</target>
+	<target name="mytest" >
+		<junit printsummary="yes" haltonfailure="yes" >
+			<classpath>
+				<fileset dir="../matos/payara41/glassfish/modules" includes="**/*.jar" />
+				<fileset dir="../matos" includes="*.jar" />
+				<pathelement location="build/test/classes" />
+				<pathelement location="build/web/WEB-INF/classes" />
+			</classpath>
+			<formatter type="plain" />
+			<batchtest fork="yes" todir="build/test/results" >
+				<fileset dir="test" >
+					<include name="**/*Test.java" />
+				</fileset >
+			</batchtest >
+		</junit >
+	</target >
+
 </project>
